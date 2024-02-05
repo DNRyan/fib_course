@@ -13,8 +13,16 @@ describe("initalise rover", () => {
 });
 
 describe("move rover", () => {
-  it("Move rover forward by 1", () => {
-    let rover = initialiseRover(0, 0, "N")
-    expect(moveForward(rover)).toEqual({x: 0, y: 1, direction: "N"});
-  });
+  it.each([
+    ["N", 0, 1],
+    ["E", 1, 0],
+    ["S", 0, -1],
+    ["W", -1, 0],
+  ] as const)(
+    "Move rover forward by 1 for any direction",
+    (direction, x, y) => {
+      const rover = initialiseRover(0, 0, direction);
+      expect(moveForward(rover)).toEqual({ x, y, direction });
+    }
+  );
 });
