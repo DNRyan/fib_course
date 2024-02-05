@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { initialiseRover, moveForward } from "./rover";
+import { initialiseRover, moveForward, moveBack } from "./rover";
 
 describe("initalise rover", () => {
   it("Initialises a rover object", () => {
@@ -23,6 +23,18 @@ describe("move rover", () => {
     (direction, x, y) => {
       const rover = initialiseRover(0, 0, direction);
       expect(moveForward(rover)).toEqual({ x, y, direction });
+    }
+  );
+  it.each([
+    ["N", 0, -1],
+    ["E", -1, 0],
+    ["S", 0, 1],
+    ["W", 1, 0],
+  ] as const)(
+    "Move rover back by 1 for any direction",
+    (direction, x, y) => {
+      const rover = initialiseRover(0, 0, direction);
+      expect(moveBack(rover)).toEqual({ x, y, direction });
     }
   );
 });
