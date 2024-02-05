@@ -1,24 +1,26 @@
 import { Rover } from "./types";
 
-const world = {
+export const world = {
   width: 10,
   height: 10,
 };
 
 export function moveForward(rover: Rover) {
   switch (rover.direction) {
-    case "N":
-      const newY = rover.y + 1;
-      if (newY > world.height) {
-        return { ...rover, y: 0 };
-      }
-      return { ...rover, y: rover.y + 1 };
-    case "E":
+    case "N": {
+      const newY = rover.y + 1 > world.height ? 0 : rover.y + 1;
+      return { ...rover, y: newY };
+    }
+    case "E": {
       return { ...rover, x: rover.x + 1 };
-    case "S":
-      return { ...rover, y: rover.y - 1 };
-    case "W":
+    }
+    case "S": {
+      const newY = rover.y - 1 < 0 ? world.height : rover.y - 1;
+      return { ...rover, y: newY };
+    }
+    case "W": {
       return { ...rover, x: rover.x - 1 };
+    }
   }
 }
 
