@@ -1,18 +1,6 @@
-type Direction = "N" | "E" | "S" | "W";
+import { Rover } from "./types";
 
-export function initialiseRover(x: number, y: number, direction: Direction) {
-  if (["N", "E", "S", "W"].includes(direction)) {
-    return { x, y, direction };
-  }
-
-  throw new Error("Invalid direction provided");
-}
-
-export function moveForward(rover: {
-  x: number;
-  y: number;
-  direction: Direction;
-}) {
+export function moveForward(rover: Rover) {
   switch (rover.direction) {
     case "N":
       return { ...rover, y: rover.y + 1 };
@@ -25,11 +13,7 @@ export function moveForward(rover: {
   }
 }
 
-export function moveBack(rover: {
-  x: number;
-  y: number;
-  direction: Direction;
-}) {
+export function moveBack(rover: Rover) {
   switch (rover.direction) {
     case "N":
       return { ...rover, y: rover.y - 1 };
