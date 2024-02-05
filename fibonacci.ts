@@ -1,6 +1,3 @@
 export function fibonacci(n: number) {
-  if (n === 1) {
-    return 1
-  }
-  return 0;
+  return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
 }
