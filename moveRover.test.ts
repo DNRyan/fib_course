@@ -16,6 +16,15 @@ describe("move rover", () => {
     }
   );
 
+  it.each([[[0, 10, "N"], { x: 0, y: 0, direction: "N" }]] as const)(
+    "Wraps around the edges of the world",
+    (init, expected) => {
+      const rover = initialiseRover(...init);
+      expect(moveForward(rover)).toEqual(expected);
+    }
+  );
+
+
   it.each([
     ["N", 0, -1],
     ["E", -1, 0],
