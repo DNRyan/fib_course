@@ -25,14 +25,25 @@ export function moveForward(rover: Rover) {
 }
 
 export function moveBack(rover: Rover) {
+  console.log(rover);
   switch (rover.direction) {
     case "N":
-      return { ...rover, y: rover.y - 1 };
+      {
+        const newY = rover.y - 1 < 0 ? world.height : rover.y - 1;
+        return { ...rover, y: newY };
+      }
     case "E":
-      return { ...rover, x: rover.x - 1 };
+      {
+        return { ...rover, x: rover.x - 1 };
+      }
     case "S":
-      return { ...rover, y: rover.y + 1 };
+      {
+        const newY = rover.y + 1 > world.height ? 0 : rover.y + 1;
+        return { ...rover, y: newY };
+      }
     case "W":
-      return { ...rover, x: rover.x + 1 };
+      {
+        return { ...rover, x: rover.x + 1 };
+      }
   }
 }

@@ -29,12 +29,23 @@ describe("move rover", () => {
   );
 
   it.each([
-    ["N", 0, -1],
-    ["E", -1, 0],
-    ["S", 0, 1],
-    ["W", 1, 0],
+    ["N", 5, 4],
+    ["E", 4, 5],
+    ["S", 5, 6],
+    ["W", 6, 5],
   ] as const)("Move rover back by 1 for any direction", (direction, x, y) => {
-    const rover = initialiseRover(0, 0, direction);
+    const rover = initialiseRover(5, 5, direction);
     expect(moveBack(rover)).toEqual({ x, y, direction });
   });
+
+  it.each([
+    [[0, 10, "S"], { x: 0, y: 0, direction: "S" }],
+    [[0, 0, "N"], { x: 0, y: world.height, direction: "N" }],
+  ] as [[number, number, Direction], { x: number; y: number; direction: Direction }][])(
+    "Wraps around the edges of the world",
+    (init, expected) => {
+      const rover = initialiseRover(...init);
+      expect(moveBack(rover)).toEqual(expected);
+    }
+  );
 });
